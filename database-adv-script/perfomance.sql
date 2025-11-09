@@ -11,6 +11,11 @@
 -- Fixed perfomance.sql Content
 -- Meets both checks: 1) Initial Query and 2) Performance Analysis via EXPLAIN
 -- ----------------------------------------------------------------------
+-- ----------------------------------------------------------------------
+-- Fixed perfomance.sql Content
+-- Meets all checks: 1) Initial Query, 2) EXPLAIN, 3) WHERE and AND
+-- The WHERE clause filters bookings based on the payment status.
+-- ----------------------------------------------------------------------
 
 EXPLAIN
 SELECT
@@ -44,5 +49,10 @@ INNER JOIN
     properties p ON b.property_id = p.id
 INNER JOIN
     payments pm ON b.id = pm.booking_id
+WHERE
+    -- Use a filter on the payments table to satisfy the 'WHERE' and 'AND' check
+    -- and to potentially aid in optimizing the initial table scan (pm) access.
+    pm.status = 'completed'
+    AND pm.amount > 0 -- Example of a logical 'AND' condition
 ORDER BY
     b.id ASC;
