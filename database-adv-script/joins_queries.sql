@@ -11,7 +11,9 @@ SELECT
 FROM
     bookings AS b
 INNER JOIN
-    users AS u ON b.user_id = u.id;
+    users AS u ON b.user_id = u.id
+ORDER BY
+    b.id ASC;
 
 -- 2. LEFT JOIN: Retrieve all properties and their reviews, including properties that have no reviews.
 -- Returns all properties (left side) and matching reviews (right side), with NULL for unmatched reviews.
@@ -24,7 +26,9 @@ SELECT
 FROM
     properties AS p
 LEFT JOIN
-    reviews AS r ON p.id = r.property_id;
+    reviews AS r ON p.id = r.property_id
+ORDER BY
+    p.id ASC, r.id ASC;
 
 -- 3. FULL OUTER JOIN: Retrieve all users and all bookings, even if the user has no booking or a booking is not linked to a user.
 -- This implementation uses UNION to emulate FULL OUTER JOIN, which is necessary for MySQL/MariaDB.
@@ -51,7 +55,9 @@ FROM
 RIGHT JOIN
     bookings AS b ON u.id = b.user_id
 WHERE
-    u.id IS NULL;
+    u.id IS NULL
+ORDER BY
+    user_id ASC, booking_id ASC;
 
 -- If your database (e.g., PostgreSQL, SQLite 3.39+) supports the FULL OUTER JOIN keyword,
 -- you can replace the entire UNION block above with this single query:
@@ -64,5 +70,7 @@ SELECT
 FROM
     users AS u
 FULL OUTER JOIN
-    bookings AS b ON u.id = b.user_id;
+    bookings AS b ON u.id = b.user_id
+ORDER BY
+    user_id ASC, booking_id ASC;
 */
