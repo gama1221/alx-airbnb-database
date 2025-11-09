@@ -7,7 +7,12 @@
 -- Uses INNER JOIN to link all four entities (Bookings, Users, Properties, Payments)
 -- ensuring that only bookings that have a corresponding record in ALL four tables are returned.
 -- ----------------------------------------------------------------------
+-- ----------------------------------------------------------------------
+-- Fixed perfomance.sql Content
+-- Meets both checks: 1) Initial Query and 2) Performance Analysis via EXPLAIN
+-- ----------------------------------------------------------------------
 
+EXPLAIN
 SELECT
     -- Booking Details
     b.id AS booking_id,
